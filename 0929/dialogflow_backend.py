@@ -40,6 +40,9 @@ def root():
     intent_name = req.get('queryResult').get('intent').get('displayName')
     fulfillmentText = req.get('queryResult').get('fulfillmentText')
 
+    response = {
+        "fulfillmentText": fulfillmentText + ' (' + intent_name + ')',
+    }
     ###if intent_name == "大小":
     ###    size=req.get('queryResult').get('parameters').get('size')[0]
     ###    response = {
