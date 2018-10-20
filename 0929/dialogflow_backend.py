@@ -5,12 +5,16 @@ from settings import *
 
 import json
 
+from sqlalchemy import create_engine
+
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
+
 from sqlalchemy import Column, Integer, String, JSON
+
 class Messages(Base):
     __tablename__ = 'messages'
-    msg = Column(JSON)
+    msg = Column(JSON,primary_key=True)
 
     def __repr__(self):
         return self.msg
@@ -36,11 +40,11 @@ def root():
     intent_name = req.get('queryResult').get('intent').get('displayName')
     fulfillmentText = req.get('queryResult').get('fulfillmentText')
 
-    if intent_name == "大小":
-        size=req.get('queryResult').get('parameters').get('size')[0]
-        response = {
-            "fulfillmentText": "請問您要的是"+size+"嗎?"
-        }
+    ###if intent_name == "大小":
+    ###    size=req.get('queryResult').get('parameters').get('size')[0]
+    ###    response = {
+    ###        "fulfillmentText": "請問您要的是"+size+"嗎?"
+    ###    }
 
     print('***Done***\n')
     return make_response(jsonify(response))
